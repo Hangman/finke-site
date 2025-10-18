@@ -1,0 +1,8 @@
+
+@import "tailwindcss";
+@import "./fonts.css";
+
+@theme {
+  --font-head1: "Head1", sans-serif;
+  --font-head2: "Head2", sans-serif;
+}
