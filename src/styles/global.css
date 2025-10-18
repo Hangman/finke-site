@@ -6,3 +6,46 @@
   --font-head1: "Head1", sans-serif;
   --font-head2: "Head2", sans-serif;
 }
+
+@layer components {
+  /* Wiederverwendbare „Seitenbreite“ (anstelle von .container) */
+  .site-wrap {
+    /* max width + horizontales Padding */
+    @apply max-w-6xl mx-auto px-4 md:px-6;
+  }
+
+  /* Link-Stil in der Navbar mit animierter Underline */
+  .nav-link {
+    @apply relative inline-block py-2 text-[15px] font-medium text-gray-700 transition-colors duration-200;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 200ms ease;
+    background: currentColor;
+    opacity: 0.9;
+  }
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    @apply text-blue-600;
+  }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after,
+  .nav-link.is-active::after {
+    transform: scaleX(1);
+  }
+  .nav-link.is-active {
+    @apply text-blue-600;
+  }
+
+  /* Touch-Tap-Ziele etwas größer */
+  .tap-target {
+    @apply -mx-2 px-2;
+  }
+}
