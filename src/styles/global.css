@@ -5,6 +5,10 @@
 @theme {
   --font-head1: "Head1", sans-serif;
   --font-head2: "Head2", sans-serif;
+
+  --color-primary: #5A4FCF;         /* Basis */
+  --color-primary-600: #4B3DBA;     /* Hover/Darken ~10–12% */
+  --color-primary-50: #F2F1FF;      /* Sehr hell für Hintergründe */
 }
 
 @layer components {
@@ -33,7 +37,7 @@
   }
   .nav-link:hover,
   .nav-link:focus-visible {
-    @apply text-blue-600;
+    @apply text-primary-600;
   }
   .nav-link:hover::after,
   .nav-link:focus-visible::after,
@@ -41,7 +45,7 @@
     transform: scaleX(1);
   }
   .nav-link.is-active {
-    @apply text-blue-600;
+    @apply text-primary-600;
   }
 
   /* Touch-Tap-Ziele etwas größer */
