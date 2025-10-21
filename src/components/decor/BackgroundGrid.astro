@@ -1,0 +1,46 @@
+---
+interface Props {
+  class?: string;
+  size?: number; // Zellgröße in px (optional)
+  alpha?: number; // Linien-Deckkraft 0..1 (optional)
+  color?: string; // RGB oder HEX (optional) – Standard: Primärblau
+}
+const { class: className, size = 22, alpha = 0.06, color = "#2759FD" } = Astro.props;
+
+// Farbe in CSS-Var schieben; falls HEX -> lassen wir CSS es interpretieren
+// für rgba nutzen wir 'color-mix' mit transparent
+---
+
+<div class={`paper-grid ${className || ""}`} style={`--paper-grid-size:${size}px; --paper-grid-alpha:${alpha}; --paper-grid-color:${color};`}>
+  <slot />
+</div>
+
+<style>
+  .paper-grid {
+    position: relative;
+    isolation: isolate;
+  }
+  .paper-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    /* feines, gleichmäßiges Raster – Linienfarbe = var(--paper-grid-color) sehr transparent */
+    background: repeating-linear-gradient(
+        0deg,
+        color-mix(in srgb, var(--paper-grid-color, #2759fd) calc(var(--paper-grid-alpha, 0.06) * 100%), transparent) 0,
+        color-mix(in srgb, var(--paper-grid-color, #2759fd) calc(var(--paper-grid-alpha, 0.06) * 100%), transparent) 1px,
+        transparent 1px,
+        transparent var(--paper-grid-size, 22px)
+      ),
+      repeating-linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--paper-grid-color, #2759fd) calc(var(--paper-grid-alpha, 0.06) * 100%), transparent) 0,
+        color-mix(in srgb, var(--paper-grid-color, #2759fd) calc(var(--paper-grid-alpha, 0.06) * 100%), transparent) 1px,
+        transparent 1px,
+        transparent var(--paper-grid-size, 22px)
+      );
+    background-color: #f8fafc; /* Basisweiß aus der Vorlage */
+  }
+</style>

@@ -1,0 +1,19 @@
+---
+import Eyebrow from "../ui/Eyebrow.astro";
+
+interface Props {
+  id?: string;
+  title?: string; // optional, wenn du Überschrift direkt im Block machst
+  eyebrow?: string; // optional: kleines Label über der Überschrift
+  class?: string;
+}
+const { id, title, eyebrow, class: className } = Astro.props;
+---
+
+<section id={id} class={`section-space scroll-mt-24 ${className || ""}`}>
+  <div class="site-wrap">
+    {eyebrow && <Eyebrow class="eyebrow mb-4">{eyebrow}</Eyebrow>}
+    {title && <h2 class="font-semibold text-2xl md:text-3xl lg:text-4xl tracking-tight">{title}</h2>}
+    <slot />
+  </div>
+</section>

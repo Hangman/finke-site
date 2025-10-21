@@ -1,17 +1,60 @@
+/* ============ Poppins (Sans) ============ */
 @font-face {
-  font-family: "Head1";
-  src:
-    url("/fonts/head1.woff2") format("woff2");
+  font-family: "Poppins";
+  src: url("/fonts/subset-Poppins-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/subset-Poppins-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/subset-Poppins-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/subset-Poppins-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
+/* ============ GeistMono (Monospace) ============ */
 @font-face {
-  font-family: "Head2";
-  src:
-    url("/fonts/head2.woff2") format("woff2");
+  font-family: "GeistMono";
+  src: url("/fonts/subset-GeistMono-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/subset-GeistMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/subset-GeistMono-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/subset-GeistMono-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+

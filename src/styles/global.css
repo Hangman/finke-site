@@ -3,12 +3,18 @@
 @import "./fonts.css";
 
 @theme {
-  --font-head1: "Head1", sans-serif;
-  --font-head2: "Head2", sans-serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "GeistMono", ui-monospace, monospace;
 
-  --color-primary: #5A4FCF;         /* Basis */
-  --color-primary-600: #4B3DBA;     /* Hover/Darken ~10–12% */
-  --color-primary-50: #F2F1FF;      /* Sehr hell für Hintergründe */
+  --color-primary: #2759FD;
+  --color-primary-600: #2759FD;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-slate-900 bg-[#F7F9FC];
+  }
 }
 
 @layer components {
@@ -52,4 +58,9 @@
   .tap-target {
     @apply -mx-2 px-2;
   }
+
+  .site-wrap { @apply max-w-6xl mx-auto px-4 md:px-6; }
+
+  /* Einheitlicher vertikaler Raum pro Section */
+  .section-space { @apply py-16 md:py-24; }
 }

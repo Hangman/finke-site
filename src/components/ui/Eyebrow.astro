@@ -1,0 +1,50 @@
+---
+interface Props {
+  class?: string; // nur für Abstände wie mb-4 etc.
+}
+const { class: className } = Astro.props;
+---
+
+<span class={`eyebrow ${className ?? ""}`}>
+  <span class="inner"><slot /></span>
+</span>
+
+<style>
+  /* Farben & Maße (leicht anpassbar) */
+  .eyebrow {
+    --eyebrow-border: #497ff7;
+    --eyebrow-fill: #dde9fe;
+    --eyebrow-text-color: #2039b9;
+    --eyebrow-radius: 0px; /* eckiger Look */
+    --eyebrow-gap: 4px; /* Abstand zwischen Strich & Innenfläche */
+    --eyebrow-stroke: 2px; /* Strichdicke */
+  }
+
+  .eyebrow {
+    display: inline-block;
+    border: var(--eyebrow-stroke) dashed var(--eyebrow-border);
+    border-radius: var(--eyebrow-radius);
+    padding: var(--eyebrow-gap);
+  }
+
+  .eyebrow .inner {
+    display: block;
+    border-radius: var(--eyebrow-radius);
+    background: var(--eyebrow-fill);
+    padding: 4px 8px;
+    font-family: "GeistMono", ui-monospace, monospace;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    color: var(--eyebrow-text-color);
+    text-transform: none;
+  }
+
+  @media (min-width: 768px) {
+    .eyebrow .inner {
+      font-size: 16px;
+      padding: 4px 8px;
+    }
+  }
+</style>

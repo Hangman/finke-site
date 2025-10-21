@@ -1,133 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import BackgroundGrid from "../components/decor/BackgroundGrid.astro";
+import Hero from "../components/blocks/Hero.astro";
+import About from "../components/blocks/About.astro";
+import Section from "../components/layout/Section.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-  <section id="home" class="site-wrap scroll-mt-24 py-24">
-    <h1 class="font-heading text-3xl md:text-4xl">Hero / Header</h1>
-  </section>
+  <!-- Gemeinsamer Papier-Hintergrund für Hero + About -->
+  <BackgroundGrid>
+    <Hero />
+    <About />
+  </BackgroundGrid>
 
-  <section id="about" class="site-wrap scroll-mt-24 py-24">
-    <h2 class="font-heading text-2xl md:text-3xl">Über mich</h2>
-  </section>
-
-  <section id="services" class="site-wrap scroll-mt-24 py-24">
-    <h2 class="font-heading text-2xl md:text-3xl">Leistungen</h2>
-  </section>
-
-  <section id="faq" class="site-wrap scroll-mt-24 py-24">
-    <h2 class="font-heading text-2xl md:text-3xl">FAQ</h2>
-  </section>
-
-  <section id="contact" class="site-wrap scroll-mt-24 py-24">
-    <h2 class="font-heading text-2xl md:text-3xl">Kontakt</h2>
-  </section>
-
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
-  <p>Bla</p><br />
+  <!-- Nächster Bereich mit anderem Hintergrund -->
+  <Section id="services" class="bg-[#EDF2FF]">
+    <h3 class="font-semibold text-2xl md:text-3xl mb-6">Leistungen</h3>
+    <div class="h-40 rounded-xl bg-white/70 ring-1 ring-black/5 grid place-items-center">Platzhalter nächster Bereich</div>
+  </Section>
 </Layout>

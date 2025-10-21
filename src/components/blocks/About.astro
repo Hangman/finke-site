@@ -1,0 +1,50 @@
+---
+import Section from "../layout/Section.astro";
+import Button from "../ui/Button.astro";
+
+interface Props {
+  id?: string;
+  class?: string;
+  title?: string;
+  eyebrow?: string;
+}
+const { id = "about", class: className, title = "Ausgezeichnete steuerliche Exzellenz", eyebrow = "About us" } = Astro.props;
+---
+
+<Section id={id} class={className} title={title} eyebrow={eyebrow}>
+  <div class="grid lg:grid-cols-2 gap-8 items-start">
+    <!-- Bild-Grid (Platzhalter) -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="aspect-square rounded-xl bg-slate-200 ring-1 ring-primary/40"></div>
+      <div class="aspect-square rounded-xl bg-slate-200 ring-1 ring-primary/40"></div>
+      <div class="aspect-square rounded-xl bg-slate-200 ring-1 ring-primary/40"></div>
+      <div class="aspect-square rounded-xl bg-slate-200 ring-1 ring-primary/40"></div>
+    </div>
+
+    <!-- Copy + Zahlen -->
+    <div>
+      <p class="text-slate-600 mb-6">Kanzlei mit Fokus auf Betriebsprüfungen, Umstrukturierungen und Nachfolge – rechtssicher und steueroptimiert.</p>
+
+      <div class="grid grid-cols-2 gap-6 mb-6">
+        <div>
+          <div class="font-semibold text-2xl text-slate-900">250+</div>
+          <div class="text-slate-500 text-sm">Mandate erfolgreich begleitet</div>
+        </div>
+        <div>
+          <div class="font-semibold text-2xl text-slate-900">35+</div>
+          <div class="text-slate-500 text-sm">Jahre Team-Erfahrung</div>
+        </div>
+        <div>
+          <div class="font-semibold text-2xl text-slate-900">18</div>
+          <div class="text-slate-500 text-sm">Fachauszeichnungen</div>
+        </div>
+        <div>
+          <div class="font-semibold text-2xl text-slate-900">10</div>
+          <div class="text-slate-500 text-sm">Jahre digital</div>
+        </div>
+      </div>
+
+      <Button href="mailto:kontakt@kanzlei.de" variant="outline">Unverbindlich anfragen</Button>
+    </div>
+  </div>
+</Section>
