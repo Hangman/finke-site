@@ -2,7 +2,7 @@
 interface Props {
   href?: string;
   variant?: "primary" | "outline";
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   class?: string;
   type?: "button" | "submit" | "reset";
 }
@@ -25,15 +25,17 @@ const attrs = { "data-variant": variant, "data-size": size };
 
 <style>
   .btn {
+    /* gemeinsame Rundung */
+    --btn-radius: 0.4rem; /* ← hier einmal steuern (z.B. 0.3rem für eckiger) */
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 0.5rem; /* rounded-lg */
-    padding: 0.625rem 1rem; /* py-2.5 px-4 */
+    border-radius: var(--btn-radius);
+    padding: 0.625rem 1rem; /* md default */
     font-size: 0.875rem; /* text-sm */
-    font-family: "GeistMono", ui-monospace, monospace;
-    font-weight: 500; /* font-medium */
+    font-weight: 500;
     line-height: 1.2;
     transition:
       color 0.2s,
@@ -41,19 +43,34 @@ const attrs = { "data-variant": variant, "data-size": size };
       border-color 0.2s,
       box-shadow 0.2s;
     outline: none;
+    font-family: "GeistMono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    position: relative;
   }
+
   .btn:focus-visible {
     box-shadow:
       0 0 0 2px white,
       0 0 0 4px var(--color-primary, #2759fd);
   }
 
-  /* Variants */
+  /* ===== Variants ===== */
   .btn[data-variant="primary"] {
     color: #fff;
     background: var(--color-primary, #2759fd);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
   }
+
+  /* gestrichelte Innenkontur */
+  .btn[data-variant="primary"]::after {
+    --dash-color: #497ff7;
+    content: "";
+    position: absolute;
+    inset: 0px; /* sichtbarer Gap */
+    border-radius: var(--btn-radius);
+    border: 2px dashed var(--dash-color);
+    pointer-events: none;
+  }
+
   .btn[data-variant="primary"]:hover {
     background: var(--color-primary-600, #1f48cc);
   }
@@ -67,16 +84,22 @@ const attrs = { "data-variant": variant, "data-size": size };
     background: color-mix(in srgb, var(--color-primary, #2759fd) 10%, white);
   }
 
-  /* Sizes */
+  /* ===== Sizes ===== */
+  /* wenn du je Größe eine andere Rundung willst, hier addieren/überschreiben */
   .btn[data-size="sm"] {
     padding: 0.5rem 0.75rem;
     font-size: 0.75rem;
-  } /* text-xs */
+  }
   .btn[data-size="md"] {
     /* default oben */
   }
   .btn[data-size="lg"] {
     padding: 0.75rem 1.25rem;
     font-size: 1rem;
-  } /* text-base */
+  }
+  .btn[data-size="xl"] {
+    font-size: 1rem;
+    padding: 1rem 1.26rem;
+    border-radius: var(--btn-radius); /* nicht mehr zwangsweise runder */
+  }
 </style>
