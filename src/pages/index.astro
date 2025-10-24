@@ -1,24 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import BackgroundGrid from "../components/decor/BackgroundGrid.astro";
+import BackgroundPale from "../components/decor/BackgroundPale.astro";
 import Hero from "../components/blocks/Hero.astro";
+import Services from "../components/blocks/Services.astro";
 import About from "../components/blocks/About.astro";
-import Section from "../components/layout/Section.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-  <!-- Gemeinsamer Papier-Hintergrund für Hero + About -->
   <BackgroundGrid>
     <Hero />
-    <About />
+    <Services />
   </BackgroundGrid>
 
-  <!-- Nächster Bereich mit anderem Hintergrund -->
-  <Section id="services" class="bg-[#EDF2FF]">
-    <h3 class="font-semibold text-2xl md:text-3xl mb-6">Leistungen</h3>
-    <div class="h-40 rounded-xl bg-white/70 ring-1 ring-black/5 grid place-items-center">Platzhalter nächster Bereich</div>
-  </Section>
+  <BackgroundPale>
+    <About />
+  </BackgroundPale>
 </Layout>
