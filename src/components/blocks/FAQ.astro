@@ -1,0 +1,159 @@
+---
+import Section from "../layout/Section.astro";
+
+const faqs = [
+  {
+    q: "Wie berechnen Sie Ihre Vergütung?",
+    a: "Transparente Abrechnung nach Steuerberatervergütungsverordnung (StBVV). Für Beratungen auf Stundenbasis liegt der Ansatz typischerweise zwischen 130–180 € netto pro Stunde – abhängig von Umfang und Komplexität."
+  },
+  {
+    q: "Begleiten Sie Betriebsprüfungen auch kurzfristig?",
+    a: "Ja. Wir übernehmen Vorbereitung, Kommunikation mit der Finanzverwaltung, Strategie sowie die Abschlussbesprechung – auf Wunsch auch ad hoc. Vorab klären wir den Status und priorisieren kritische Punkte."
+  },
+  {
+    q: "Unterstützen Sie Unternehmensumstrukturierungen?",
+    a: "Ja. Von Rechtsformwahl über Holding-/Konzernstrukturen bis zur steueroptimalen Nachfolge. Wir arbeiten bei Bedarf Hand in Hand mit Notariat und Rechtsberatung."
+  },
+  {
+    q: "Bieten Sie Online-Termine an?",
+    a: "Selbstverständlich. Erstgespräche und Folgetermine können per Video stattfinden. Dokumente tauschen wir DSGVO-konform über eine gesicherte Plattform."
+  },
+  {
+    q: "Welche Unterlagen sind für ein Erstgespräch hilfreich?",
+    a: "Kurzprofil Ihres Unternehmens/der Situation, letzte Steuerbescheide, aktuelle BWA/Jahresabschluss (falls vorhanden) sowie Fragenziele. Eine einfache Liste genügt – wir strukturieren den Rest gemeinsam."
+  },
+];
+---
+
+<Section id="faq" eyebrow="FAQ" title="Häufige Fragen">
+  <p class="pt-4 max-w-3xl text-slate-700 mb-4 md:mb-8">
+    Kurz beantwortet – für alles Weitere sprechen wir persönlich. Ein Klick
+    auf die Frage öffnet die Details.
+  </p>
+
+  <div class="space-y-4">
+    {faqs.map(({ q, a }) => (
+      <details class="group faq rounded-xl bg-white ring-1 ring-black/10 shadow-sm transition-shadow">
+        <summary class="list-none cursor-pointer select-none">
+          <div class="flex items-center justify-between gap-4 px-4 py-4 md:px-6 md:py-5">
+            <!-- Frage -->
+            <h3 class="flex-1 text-base md:text-lg font-semibold tracking-tight text-slate-900">
+              {q}
+            </h3>
+
+            <!-- Chevron rechts -->
+            <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md ring-1 ring-primary/25 bg-primary/10">
+              <svg viewBox="0 0 24 24" class="h-4 w-4 text-primary transition-transform duration-300 group-open:rotate-180">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+
+          <!-- Solid border, nur sichtbar bei Hover oder open -->
+          <div class="mx-3 rounded-xl border-1 border-primary opacity-0 transition-opacity group-hover:opacity-60 group-open:opacity-60"></div>
+        </summary>
+
+        <!-- Content: Höhe-Animation via JS (siehe Script unten) -->
+        <div class="faq-content-wrapper overflow-hidden">
+          <div class="px-4 pb-4 pt-2 md:px-6 md:pb-6 text-slate-700 leading-relaxed">
+            {a}
+          </div>
+        </div>
+      </details>
+    ))}
+  </div>
+</Section>
+
+<style>
+  /* default marker killen */
+  details.faq > summary::-webkit-details-marker { display: none; }
+  details.faq > summary::marker { content: ""; }
+</style>
+
+<script is:inline>
+  // Helper: animiere Höhe mit rAF, zuverlässig bei jedem Toggle
+  function openPanel(d) {
+    const c = d.querySelector(".faq-content-wrapper");
+    if (!c) return;
+
+    // Panel in geschlossenem Zustand vorbereiten
+    d.open = true;               // [open] setzen (für :open Styles / Chevron)
+    c.style.overflow = "hidden";
+    c.style.height = "0px";
+
+    // 2x rAF: erst Layout fixieren, dann animieren
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        c.style.transition = "height 300ms ease";
+        c.style.height = c.scrollHeight + "px";
+      });
+    });
+
+    function done() {
+      c.style.transition = "";
+      // Nach dem Öffnen auf 'auto' stellen, damit Inhalte flexibel bleiben.
+      c.style.height = "auto";
+      c.style.overflow = "visible";
+      c.removeEventListener("transitionend", done);
+    }
+    c.addEventListener("transitionend", done);
+  }
+
+  function closePanel(d) {
+    const c = d.querySelector(".faq-content-wrapper");
+    if (!c) return;
+
+    // Von aktueller Höhe (auto → scrollHeight) nach 0 animieren
+    c.style.overflow = "hidden";
+    c.style.height = c.scrollHeight + "px";
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        c.style.transition = "height 300ms ease";
+        c.style.height = "0px";
+      });
+    });
+
+    function done() {
+      c.style.transition = "";
+      c.style.overflow = "hidden";
+      c.style.height = "0px";
+      d.open = false; // [open] entfernen (für :open Styles / Chevron)
+      c.removeEventListener("transitionend", done);
+    }
+    c.addEventListener("transitionend", done);
+  }
+
+  // Akkordeon: genau ein Panel offen
+  const panels = Array.from(document.querySelectorAll("details.faq"));
+  panels.forEach((d) => {
+    const sum = d.querySelector("summary");
+    const wrap = d.querySelector(".faq-content-wrapper");
+    if (!sum || !wrap) return;
+
+    // initialen Zustand fixen
+    if (d.open) {
+      wrap.style.height = "auto";
+      wrap.style.overflow = "visible";
+    } else {
+      wrap.style.height = "0px";
+      wrap.style.overflow = "hidden";
+    }
+
+    sum.addEventListener("click", (e) => {
+      e.preventDefault(); // natives Toggle verhindern – wir animieren selbst
+
+      if (d.open) {
+        // dieses Panel schließen
+        closePanel(d);
+      } else {
+        // andere offene schließen
+        panels.forEach((other) => {
+          if (other !== d && other.open) closePanel(other);
+        });
+        // dieses öffnen
+        openPanel(d);
+      }
+    });
+  });
+</script>
