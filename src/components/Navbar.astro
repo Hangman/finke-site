@@ -11,20 +11,12 @@ const links = [
 <nav class="fixed inset-x-0 top-0 z-50 bg-white border-b border-black/15 shadow-[0_1px_8px_rgba(0,0,0,0.5)]">
   <div class="site-wrap">
     <div class="flex h-16 items-center justify-between">
-      <!-- Brand: CSS-Icon + Wortmarke (einzeilig) -->
-      <a href="#home" class="flex items-center gap-3 tap-target">
-        <!-- CSS-Icon (Balken in Kachel) -->
-        <span class="relative inline-block h-10 w-10 rounded-lg bg-primary/10 ring-1 ring-primary/30">
-          <!-- Rahmen -->
-          <span class="absolute inset-1 rounded-md border-4 border-primary/80"></span>
-          <!-- Balken -->
-          <span class="absolute left-[10px] bottom-2 h-[12px] w-[5px] rounded-sm bg-primary"></span>
-          <span class="absolute left-[17px] bottom-2 h-[16px] w-[5px] rounded-sm bg-primary"></span>
-          <span class="absolute left-[24px] bottom-2 h-[18px] w-[5px] rounded-sm bg-primary"></span>
-        </span>
-
-        <!-- Wortmarke -->
-        <span class="font-head1 tracking-tight text-xl lg:text-2xl text-slate-900"> Sophie Finke </span>
+      <!-- Brand -->
+      <a href="#home" class="group inline-flex gap-2" aria-label="Zur Startseite">
+        <div class="leading-tight">
+          <div class="text-2xl font-bold tracking-tight text-slate-900 group-hover:text-primary transition-colors">Kanzlei&nbsp;Finke</div>
+          <div class="text-lg font-medium text-slate-500 group-hover:text-primary/80 transition-colors">Steuerberatung</div>
+        </div>
       </a>
 
       <!-- Desktop -->

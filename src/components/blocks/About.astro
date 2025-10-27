@@ -2,24 +2,89 @@
 import Section from "../layout/Section.astro";
 
 const taetigkeiten = [
-  { from: "2008", to: "2011", title: "Duales Studium zur Diplom-Finanzwirtin (FH)", org: "Hochschule für Finanzen NRW", type: "edu" },
-  { from: "2012", to: "2014", title: "Master of Laws (LL.M.) Unternehmensteuerrecht", org: "Universität zu Köln", type: "work" },
-  { from: "2015", title: "Steuerberaterexamen", org: "erfolgreich abgelegt", type: "edu" },
-  { from: "2021", to: "2024", title: "Master of Public Management (MPM)", org: "HSPV NRW", type: "work" },
-  { from: "2011", to: "2014", title: "Veranlagung – Einzelunternehmen", org: "Finanzverwaltung NRW", type: "edu" },
-  { from: "2015", to: "2016", title: "Betriebsprüferin – KMU", org: "Finanzverwaltung NRW", type: "work" },
+  { from: "seit 08/2024", title: "Bestellte Steuerberaterin, eigene Kanzlei", org: "Sophie Finke Steuerberatung", type: "edu" },
+  { from: "seit 2022", title: "Dozentin (AO, ErbSt, Int. Steuerrecht)", org: "Studienwerk der Steuerberater", type: "work" },
+  { from: "seit 2022", title: "Coach für Prüfungsvorbereitung - Gesellschafterin", org: "JES GbR", link: "#", type: "edu" },
   {
     from: "2016",
     to: "07/2024",
-    title: "Betriebsprüferin – Großbetriebe & Konzerne",
+    title: "Betriebsprüferin - Großbetriebe & Konzerne",
     org: "Finanzverwaltung NRW",
-    note: "Schwerpunkt: Auslandsfachprüfung",
-    type: "edu",
+    type: "work",
   },
-  { from: "seit 2022", title: "Coach für Prüfungsvorbereitung · Gesellschafterin", org: "JES GbR", link: "#", type: "work" },
-  { from: "seit 2022", title: "Dozentin (AO, ErbSt, Int. Steuerrecht)", org: "Studienwerk der Steuerberater", type: "edu" },
-  { from: "seit 08/2024", title: "Bestellte Steuerberaterin, eigene Kanzlei", org: "Sophie Finke Steuerberatung", type: "work" },
+  { from: "2015", to: "2016", title: "Betriebsprüferin - KMU", org: "Finanzverwaltung NRW", type: "edu" },
+  { from: "2011", to: "2014", title: "Veranlagung - Einzelunternehmen", org: "Finanzverwaltung NRW", type: "work" },
+  { from: "2021", to: "2024", title: "Master of Public Management (MPM)", org: "HSPV NRW", type: "edu" },
+  { from: "2015", title: "Steuerberaterexamen", org: "erfolgreich abgelegt", type: "work" },
+  { from: "2012", to: "2014", title: "Master of Laws (LL.M.) Unternehmensteuerrecht", org: "Universität zu Köln", type: "edu" },
+  { from: "2008", to: "2011", title: "Duales Studium zur Diplom-Finanzwirtin (FH)", org: "Hochschule für Finanzen NRW", type: "work" },
 ];
+
+/** Helfer: aus "seit 08/2024", "07/2024", "2024" die Jahreszahl ermitteln */
+function parseYear(s: string) {
+  const m = String(s).match(/(\d{2})\/(\d{4})|(\d{4})/);
+  return m ? Number(m[2] || m[3]) : 0;
+}
+
+/** Sortierschlüssel: neueste zuerst (nimmt max von from/to) */
+function sortKey(it) {
+  const yFrom = parseYear(it.from);
+  const yTo = it.to ? parseYear(it.to) : yFrom;
+  return Math.max(yFrom, yTo);
+}
+
+function hasMonth(v?: string) {
+  return v ? /(^|\s)\d{2}\/\d{4}/.test(String(v)) : false; // z.B. "07/2024" oder "seit 08/2024"
+}
+function isSeit(v?: string) {
+  return v ? /^seit\b/i.test(String(v)) : false;
+}
+
+function spanLabel(it: { from?: string; to?: string }) {
+  const f = String(it.from || "");
+  const t = String(it.to || "");
+  const fHasMonth = hasMonth(f);
+  const tHasMonth = hasMonth(t);
+
+  // "seit …" Fälle
+  if (isSeit(f)) {
+    if (fHasMonth) return `${f} – heute`;
+    return t ? `${f} – ${t}` : `bis heute`;
+  }
+
+  // Beide mit Monat -> volle Spanne
+  if (fHasMonth && tHasMonth) return `${f} – ${t}`;
+
+  // Nur 'to' hat Monat, 'from' nur Jahr -> "bis MM/JJJJ"
+  if (!fHasMonth && tHasMonth) return `bis ${t}`;
+
+  // Keine Monatsangaben
+  if (!fHasMonth && !tHasMonth) {
+    if (f && t) return `bis ${t}`; // Jahres-Spanne, Startjahr steht schon als Gruppenkopf
+    return null; // nur einzelnes Jahr -> nichts anzeigen
+  }
+
+  // Nur 'from' hat Monat (und kein 'to')
+  if (fHasMonth && !t) return f;
+
+  // Fallback (sollte selten greifen)
+  return f || t || null;
+}
+
+/** Gruppieren nach Startjahr (von „from“) */
+function groupByStartYear(items) {
+  const map = new Map<number, any[]>();
+  for (const it of items) {
+    const y = parseYear(it.from);
+    if (!map.has(y)) map.set(y, []);
+    map.get(y)!.push(it);
+  }
+  // Jahre neu→alt
+  const years = [...map.keys()].sort((a, b) => b - a);
+  // Einträge im Jahr ebenfalls neu→alt (nach sortKey)
+  return years.map((y) => [y, map.get(y)!.sort((a, b) => sortKey(b) - sortKey(a))] as const);
+}
+const groups = groupByStartYear(taetigkeiten);
 
 /** Hilfsfunktionen: Datum in Sortierschlüssel (für „neu → alt“) */
 function toKey(v) {
@@ -39,46 +104,39 @@ function sideFor(item) {
 ---
 
 <Section id="about" eyebrow="About" title="Werdegang & Erfahrung">
-  <p class="pt-4 max-w-3xl text-slate-700 mb-8">
+  <p class="pt-4 max-w-3xl text-slate-700 mb-4 md:mb-12">
     Fundiertes Fachwissen aus Verwaltung und Lehre, kombiniert mit praktischer Prüfungserfahrung: Ausbildung und Tätigkeiten bilden die Basis für klare,
     belastbare Beratung – von der Betriebsprüfung bis zur Nachfolgeplanung.
   </p>
 
   <!-- Wrapper: Mittelachse absolut, Einträge in Grid -->
-  <div class="relative">
-    <!-- Mittelachse (nur >= md sichtbar) -->
-    <div class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 rounded-sm bg-primary/50"></div>
+  <div class="hidden md:block relative">
+    <!-- Mittelachse -->
+    <div class="absolute left-1/2 -translate-x-1/2 -top-4 -bottom-16 w-1 rounded-sm bg-primary/50">
+      <span class="absolute -top-7 left-1/2 -translate-x-1/2 text-lg font-semibold text-primary">Heute</span>
+      <span class="absolute -bottom-7 left-1/2 -translate-x-1/2 text-lg font-semibold text-primary">2008</span>
+    </div>
 
-    <!-- Alternierende Timeline -->
-    <ol class="grid gap-y-4 md:gap-y-0 md:grid-cols-2">
+    <!-- Timeline entries -->
+    <ol class="grid services-grid gap-y-4 md:gap-y-4 md:grid-cols-2">
       {
         taetigkeiten.map((item) => {
           const isLeft = sideFor(item) === "left";
 
           const Card = (
             <li class={`relative ${isLeft ? "md:pr-10" : "md:pl-10"}`}>
-              {/* Mobile: einfache linke Linie + Marker */}
-              <span class="absolute left-[10px] top-[26px] h-[2px] w-6 bg-primary/40 md:hidden" />
-              <span class="absolute left-[15px] top-[20px] h-2.5 w-2.5 rounded-full bg-primary md:hidden" />
-
-              {/* Desktop: Connector/Marker zur Mittelachse */}
               {isLeft ? (
-                <>
-                  {/* von Boxkante (right:0) bis Achse */}
+                <Fragment>
                   <span class="hidden md:block absolute top-[26px] right-0 w-10 h-[2px] bg-primary/80" />
-                  {/* Marker auf Achse */}
                   <span class="hidden md:block absolute top-[20px] -right-[7px] h-3.5 w-3.5 rounded-full bg-primary" />
-                </>
+                </Fragment>
               ) : (
-                <>
-                  {/* von Boxkante (left:0) bis Achse */}
+                <Fragment>
                   <span class="hidden md:block absolute top-[26px] left-0 w-10 h-[2px] bg-primary/80" />
-                  {/* Marker auf Achse */}
                   <span class="hidden md:block absolute top-[20px] -left-[7px] h-3.5 w-3.5 rounded-full bg-primary" />
-                </>
+                </Fragment>
               )}
 
-              {/* Box */}
               <div class="rounded-lg bg-white ring-1 ring-black/10 p-4">
                 <div class="text-sm mb-1 text-primary">
                   {item.to ? (
@@ -101,17 +159,67 @@ function sideFor(item) {
                     item.org
                   )}
                 </div>
-                {item.note && <div class="text-slate-600 text-sm mt-1">{item.note}</div>}
               </div>
             </li>
           );
 
-          const Spacer = <li class="hidden md:block" aria-hidden="true" />;
-
           // Reihenaufbau: [Card|Spacer] für links, [Spacer|Card] für rechts
-          return isLeft ? [Card, Spacer] : [Spacer, Card];
+          return Card;
         })
       }
     </ol>
+    <div class="mb-12"></div>
   </div>
+
+  <!-- MOBILE ONLY: kompakte, kartenlose Liste mit sticky Jahren -->
+  <section class="md:hidden" aria-label="Werdegang (mobil)">
+    <!-- dünne linke Linie als Achse -->
+    <div class="relative">
+      <div class="absolute left-[10px] top-0 bottom-0 w-[2px] bg-primary/25"></div>
+
+      <div class="space-y-5">
+        {
+          groups.map(([year, items]) => (
+            <div>
+              <h3
+                class="sticky top-[64px] z-10 ml-[-10px] py-1
+                     text-primary text-base font-bold tracking-widest
+                     bg-[#EDF2FF]"
+              >
+                {year}
+              </h3>
+
+              <ul class="mt-2 space-y-3">
+                {items.map((it) => (
+                  <li class="relative pl-8">
+                    <span class="absolute left-[5px] top-[0.55rem] h-3 w-3 rounded-full bg-primary" />
+
+                    {spanLabel(it) ? <div class="text-sm text-primary leading-none">{spanLabel(it)}</div> : null}
+                    <div class="text-base font-semibold leading-snug text-slate-900">{it.title}</div>
+                    <div class="text-base text-slate-600 leading-snug">
+                      {it.link ? (
+                        <a href={it.link} target="_blank" rel="noopener" class="underline underline-offset-2 decoration-primary/40 hover:text-primary">
+                          {it.org}
+                        </a>
+                      ) : (
+                        it.org
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </Section>
+
+<style>
+  @media (min-width: 768px) {
+    .services-grid > *:nth-child(2n) {
+      transform: translateY(3rem);
+    }
+  }
+</style>
