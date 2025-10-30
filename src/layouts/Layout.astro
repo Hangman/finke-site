@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
 ---
 
 <!doctype html>
@@ -14,9 +15,10 @@ import Navbar from "../components/Navbar.astro";
   </head>
   <body class="bg-[#FAFAFA] text-gray-900">
     <Navbar />
-    <main class="pt-16">
+    <main class="pt-20">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
 

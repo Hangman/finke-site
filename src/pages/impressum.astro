@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/layout/Section.astro";
+import Content from "../components/blocks/impressum.md";
+import BackgroundGrid from "../components/decor/BackgroundGrid.astro";
+---
+
+<Layout>
+  <BackgroundGrid>
+    <Section id="impressum" title="Impressum">
+      <div class="prose-md mt-8">
+        <Content />
+      </div>
+    </Section>
+  </BackgroundGrid>
+</Layout>

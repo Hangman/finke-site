@@ -15,6 +15,44 @@
   body {
     @apply font-sans text-slate-900 bg-[#F7F9FC];
   }
+
+  .prose-md {
+    font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+    color: rgb(51 65 85); /* text-slate-700 */
+    line-height: 1.7;
+  }
+
+  .prose-md h1,
+  .prose-md h2,
+  .prose-md h3,
+  .prose-md h4,
+  .prose-md h5,
+  .prose-md h6 {
+    font-weight: 600;
+    color: rgb(15 23 42);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.25;
+  }
+
+  .prose-md h1 { font-size: 1.875rem; }
+  .prose-md h2 { font-size: 1.5rem; }
+  .prose-md h3 { font-size: 1.25rem; }
+
+  .prose-md p { margin-bottom: 1em; }
+
+  .prose-md ul,
+  .prose-md ol { margin: 1em 0; padding-left: 1.25rem; }
+
+  .prose-md li { margin-bottom: 0.5em; }
+
+  .prose-md a {
+    color: var(--color-primary, #2759fd);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose-md strong { font-weight: 600; }
 }
 
 @layer components {
@@ -64,3 +102,5 @@
   /* Einheitlicher vertikaler Raum pro Section */
   .section-space { @apply py-12 md:py-24; }
 }
+
+

@@ -1,0 +1,100 @@
+---
+import Section from "../layout/Section.astro";
+import Button from "../ui/Button.astro";
+
+// 👉 Bitte hier deine echten Kontaktdaten eintragen
+const EMAIL = "kontakt@kanzlei.de";
+const PHONE_DISPLAY = "+49 123 4567890";
+const PHONE_TEL = "+491234567890"; // international, ohne Leerzeichen/Bindestriche
+const WHATSAPP_INT = "491234567890"; // international OHNE Plus, OHNE führende 0
+const DEFAULT_MSG = "Guten Tag, ich habe eine Frage zur Steuerberatung.";
+const waUrl = `https://wa.me/${WHATSAPP_INT}?text=${encodeURIComponent(DEFAULT_MSG)}`;
+---
+
+<Section id="contact" eyebrow="Kontakt" title="Lernen wir uns kennen">
+  <div class="grid gap-8 md:grid-cols-2 items-start">
+    <!-- Textseite -->
+    <div>
+      <p class="pt-4 text-slate-700 leading-relaxed">
+        Kurzes Anliegen oder konkrete Fragestellung? Schreiben Sie mir per E-Mail, rufen Sie an – oder nutzen Sie WhatsApp für eine schnelle Abstimmung. Ich
+        melde mich zeitnah zurück.
+      </p>
+
+      <ul class="mt-6 space-y-3 text-slate-700">
+        <li class="flex items-center gap-3">
+          <!-- Mail-Icon -->
+          <svg class="h-5 w-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"></path>
+            <path d="M22 7l-10 7L2 7"></path>
+          </svg>
+          <a class="underline underline-offset-2 decoration-primary/40 hover:text-primary" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        </li>
+
+        <li class="flex items-center gap-3">
+          <!-- Phone-Icon -->
+          <svg class="h-5 w-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <path
+              d="M22 16.92v2a2 2 0 0 1-2.18 2c-3.18-.35-6.23-1.86-8.57-4.2s-3.85-5.39-4.2-8.57A2 2 0 0 1 9.05 6h2a1 1 0 0 1 1 .78l.46 2.06a1 1 0 0 1-.27.93l-1.2 1.2a12 12 0 0 0 5.36 5.36l1.2-1.2a1 1 0 0 1 .93-.27l2.06.46a1 1 0 0 1 .78 1z"
+            ></path>
+          </svg>
+          <a class="underline underline-offset-2 decoration-primary/40 hover:text-primary" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+        </li>
+
+        <li class="flex items-center gap-3">
+          <!-- WhatsApp-Icon (clean, als Kreis + Hörer im Chat-Bubble-Stil) -->
+          <svg class="h-5 w-5 text-primary" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12 2.5a9.5 9.5 0 0 0-8.3 14.2L2.3 21.7c-.2.6.4 1.2 1 .9l5-1.4A9.5 9.5 0 1 0 12 2.5zm0 1.8a7.7 7.7 0 1 1 0 15.4c-1.2 0-2.3-.3-3.3-.7l-.3-.1-3 .8.8-3-.1-.3a7.6 7.6 0 0 1 5.9-11.8z"
+            ></path>
+            <path
+              fill="#fff"
+              d="M10.4 8.2c.2-.2.6-.2.8 0l1 .9c.2.2.3.5.2.7l-.2.6c-.1.2 0 .4.2.6l1 .8c.2.1.4.2.6.2l.6-.2c.3-.1.6 0 .7.2l.8 1c.2.2.2.5 0 .8-.8 1-2.4 1.2-3.9.6-1.1-.4-2.1-1.2-3.1-2.2S8.7 10 8.3 9c-.6-1.5-.4-3.1.6-3.9.2-.2.6-.2.8 0l.7.9z"
+            ></path>
+          </svg>
+          <a class="underline underline-offset-2 decoration-primary/40 hover:text-primary" href={waUrl} target="_blank" rel="noopener">WhatsApp Nachricht</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Buttonseite -->
+    <div class="rounded-2xl bg-white ring-1 ring-black/10 shadow-sm p-4 md:p-6">
+      <div class="space-y-3">
+        <Button href={`mailto:${EMAIL}`} variant="primary" size="lg" class="w-full justify-center">
+          <!-- Mail-Icon -->
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16v12H4z"></path><path d="M22 6L12 13 2 6"></path>
+          </svg>
+          <span>E-Mail senden</span>
+        </Button>
+
+        <Button href={`tel:${PHONE_TEL}`} variant="outline" size="lg" class="w-full justify-center">
+          <!-- Phone-Icon -->
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M22 16.92v2a2 2 0 0 1-2.18 2c-3.18-.35-6.23-1.86-8.57-4.2s-3.85-5.39-4.2-8.57A2 2 0 0 1 9.05 6h2l.46 2.06-1.47 1.47a12 12 0 0 0 5.36 5.36l1.47-1.47 2.06.46z"
+            ></path>
+          </svg>
+          <span>Jetzt anrufen</span>
+        </Button>
+
+        <Button href={waUrl} variant="outline" size="lg" class="w-full justify-center">
+          <!-- WhatsApp-Icon (einfarbig) -->
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.5a9.5 9.5 0 0 0-8.3 14.2L2.3 21.7c-.2.6.4 1.2 1 .9l5-1.4A9.5 9.5 0 1 0 12 2.5z"></path>
+            <path
+              fill="#fff"
+              d="M10.4 8.2c.2-.2.6-.2.8 0l1 .9c.2.2.3.5.2.7l-.2.6c-.1.2 0 .4.2.6l1 .8c.2.1.4.2.6.2l.6-.2c.3-.1.6 0 .7.2l.8 1c.2.2.2.5 0 .8-.8 1-2.4 1.2-3.9.6-1.1-.4-2.1-1.2-3.1-2.2S8.7 10 8.3 9c-.6-1.5-.4-3.1.6-3.9.2-.2.6-.2.8 0l.7.9z"
+            ></path>
+          </svg>
+          <span>WhatsApp schreiben</span>
+        </Button>
+      </div>
+
+      <!-- Direkt weiterhin die reinen Links anbieten -->
+      <div class="mt-4 text-xs text-slate-500">
+        Alternativ: <a class="underline underline-offset-2 decoration-primary/40 hover:text-primary" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        &middot; <a class="underline underline-offset-2 decoration-primary/40 hover:text-primary" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+      </div>
+    </div>
+  </div>
+</Section>
