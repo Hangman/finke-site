@@ -5,91 +5,91 @@ import Section from "../layout/Section.astro";
 const services = [
   {
     key: "audit",
-    title: "Betriebsprüfungs­begleitung",
-    claim: "Gelassen durch die Prüfung – von der Vorbereitung bis zum Abschluss.",
-    points: [
-      "Risikoanalyse & Dokumenten-Check",
-      "Begleitung von Gesprächen mit der Finanzverwaltung",
-      "Prüfungsstrategie, Argumentation & Einwendungen",
-      "Abschlussbesprechung, Bescheidprüfung & Rechtsbehelf"
-    ]
-  },
-  {
-    key: "reorg",
-    title: "Unternehmens­umstrukturierung & Nachfolge­beratung",
-    claim: "Rechtssicher und steueroptimiert in die nächste Unternehmensphase.",
+    title: "Unternehmensumstrukturierung & Nachfolgeberatung",
+    claim:
+      "Im unternehmerischen Alltag bleibt oft wenig Zeit, sich um die eigene Struktur oder Nachfolge zu kümmern – beides kann jedoch bares Geld kosten. Ich unterstütze Sie dabei, rechtssicher und steueroptimiert in die nächste Unternehmensphase zu gehen und berate Sie unter anderem zu folgenden Themen:",
     points: [
       "Rechtsformwahl & Umwandlungssteuerrecht",
       "Holding- & Konzernstrukturen",
-      "Gesellschafterwechsel, Management-Buy-in/-out",
-      "Nachfolgeplanung im Unternehmen"
-    ]
+      "Steuerneutrale Vorgänge nach dem Umwandlungssteuergesetz",
+      "Nachfolgeplanung im Unternehmen",
+      "Kalkulation erbschaft- und schenkungsteuerlicher Begünstigungen",
+    ],
+  },
+  {
+    key: "reorg",
+    title: "Private Nachfolgeplanung (Erbschaft & Schenkung)",
+    claim:
+      "Die private Vermögensnachfolge ist für viele Familien ein sensibles Thema. Umso wichtiger ist es, die steuerlichen Möglichkeiten und Konsequenzen frühzeitig zu kennen – und auf dieser Basis eine passende Gestaltung zu wählen. Ich helfe Ihnen, Ihr Vermögen vorausschauend und klar zu strukturieren, damit Werte erhalten und Streitigkeiten vermieden werden.",
+    points: [
+      "Bewertung von Vermögensgegenständen und Verbindlichkeiten nach dem Bewertungsgesetz",
+      "Erbschaft- & Schenkungsteuer-Optimierung",
+      "Schenkungskonzepte mit Nießbrauch, Leibrente, gemischter Schenkung oder Versorgungsleistungen",
+      "Gründung von Familiengesellschaften",
+      "Abstimmung mit Notariat & Rechtsberatung",
+    ],
   },
   {
     key: "private",
-    title: "Private Nachfolgeplanung (Erbschaft & Schenkung)",
-    claim: "Vermögen übergeben, Werte erhalten – mit steuerlicher Klarheit.",
+    title: "Betriebsprüfungsbegleitung",
+    claim:
+      "Eine Prüfungsanordnung kommt selten gelegen – und löst meist weder beim Mandanten noch beim Berater Begeisterung aus. sondern weil die Betreuung einer Prüfung viel Zeit und Ressourcen bindet. Ich unterstütze Sie im gesamten Verlauf der Prüfung – von der Vorbereitung bis zum Abschluss – mit Erfahrung, Strategie und einem klaren Blick auf das Wesentliche.",
     points: [
-      "Erbschaft- & Schenkungsteuer-Optimierung",
-      "Schenkungskonzepte mit Nießbrauch/Leibrente",
-      "Familiengesellschaften & Testamentsvollstreckung",
-      "Abstimmung mit Notariat & Rechtsberatung"
-    ]
+      "Beantwortung von Anfragen im Rahmen der Prüfung",
+      "Begleitung und strategische Beratung bei Zwischen- und Schlussbesprechungen mit der Finanzverwaltung",
+      "Bescheidprüfung und Rechtsbehelf",
+      "Erfolgsanalyse von Einwendungen",
+    ],
   },
   {
     key: "advice",
     title: "Beratung für Berater",
-    claim: "Hilfe beim Umgang mit der Finanzbehörde.",
+    claim:
+      "Ich kenne die Finanzverwaltung aus der Innenperspektive – mit all ihren Abläufen, Verfahrensschritten und Entscheidungswegen. Diese Erfahrung nutze ich, um Kolleginnen und Kollegen zielgerichtet zu unterstützen – insbesondere dann, wenn strategisches oder rechtliches Feingefühl gefragt ist.",
     points: [
-      "Pipapo",
-      "Lorem Ipsum",
-      "Raffzahnbeseitigung",
-      "Unkrautverwertung"
-    ]
-  }
+      "Einspruchs- und Klageverfahren (auch bei Untätigkeit)",
+      "Beantragung verbindlicher Auskünfte und strategische Einschätzung dazu",
+      "Vorbereitung und Begleitung von Anhörungen",
+      "Unterstützung bei der Geltendmachung von Amtshaftungsansprüchen",
+    ],
+  },
 ];
 ---
 
-<Section id="services" eyebrow="Leistungen" title="Beratung mit Fokus & Klarheit">
+<Section id="services" eyebrow="Leistungen" title="Beratung mit Klarheit – vor allem für Sie">
   <!-- Karten-Grid -->
   <div class="mt-6 grid gap-6 md:gap-8 md:grid-cols-2 md:auto-rows-fr">
-  {services.map((s) => (
-    <article class="relative h-full flex flex-col rounded-xl bg-white ring-1 ring-black/10 shadow-sm">
-      
-      <!-- linke Akzentleiste -->
-      <span class="absolute left-0 top-0 h-full w-1.5 rounded-l-xl bg-primary/80"></span>
+    {
+      services.map((s) => (
+        <article class="relative h-full flex flex-col rounded-xl bg-white ring-1 ring-black/10 shadow-sm">
+          <span class="absolute left-0 top-0 h-full w-1.5 rounded-l-xl bg-primary/80" />
 
-      <div class="px-5 pt-5">
-          <span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 ring-1 ring-primary/25">
-            <!-- kleines Akzent-Icon nur mit CSS -->
-            <span class="relative inline-block h-5 w-4">
-              <span class="absolute inset-0 rounded-[2px] border border-primary/70 bg-white"></span>
-              <span class="absolute left-0.5 right-0.5 top-1 h-[2px] bg-primary/60"></span>
-              <span class="absolute left-0.5 right-0.5 top-[10px] h-[2px] bg-primary/60"></span>
-              <span class="absolute left-0.5 right-2 top-[6px] h-[2px] bg-primary/40"></span>
+          <div class="px-5 pt-5">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 ring-1 ring-primary/25">
+              <span class="relative inline-block h-5 w-4">
+                <span class="absolute inset-0 rounded-[2px] border border-primary/70 bg-white" />
+                <span class="absolute left-0.5 right-0.5 top-1 h-[2px] bg-primary/60" />
+                <span class="absolute left-0.5 right-0.5 top-[10px] h-[2px] bg-primary/60" />
+                <span class="absolute left-0.5 right-2 top-[6px] h-[2px] bg-primary/40" />
+              </span>
             </span>
-          </span>
-        </div>
+          </div>
 
-      <div class="px-5">
-        <h3 class="mt-3 text-xl font-semibold tracking-tight text-slate-900">
-          {s.title}
-        </h3>
-        <p class="mt-2 text-slate-600 text-lg leading-relaxed tracking-tight">
-          {s.claim}
-        </p>
-      </div>
+          <div class="px-5">
+            <h3 class="mt-3 text-xl font-semibold tracking-tight text-slate-900">{s.title}</h3>
+            <p class="mt-2 text-slate-600 text-base leading-relaxed tracking-tight">{s.claim}</p>
+          </div>
 
-      <!-- Flex-Füller, damit die Liste/CTA nach unten gedrückt wird -->
-      <ul class="mt-4 px-5 pb-5 space-y-2 text-base tracking-tight font-medium text-slate-600 flex-1">
-        {s.points.map((p) => (
-          <li class="flex items-start gap-2">
-            <span class="mt-2 h-[8px] w-[8px] min-h-[8px] min-w-[8px] rounded-full bg-primary/70"></span>
-            <span>{p}</span>
-          </li>
-        ))}
-      </ul>
-    </article>
-  ))}
-</div>
+          <ul class="mt-4 px-5 pb-5 space-y-2 text-base tracking-tight font-medium text-slate-600 flex-1">
+            {s.points.map((p) => (
+              <li class="flex items-start gap-2">
+                <span class="mt-2 h-[8px] w-[8px] min-h-[8px] min-w-[8px] rounded-full bg-primary/70" />
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
 </Section>

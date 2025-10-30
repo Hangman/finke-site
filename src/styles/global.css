@@ -19,7 +19,7 @@
   .prose-md {
     font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
     color: rgb(51 65 85); /* text-slate-700 */
-    line-height: 1.7;
+    line-height: 1.5;
   }
 
   .prose-md h1,
@@ -40,6 +40,15 @@
   .prose-md h3 { font-size: 1.25rem; }
 
   .prose-md p { margin-bottom: 1em; }
+
+  .prose-md hr { 
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #00000000;
+    margin: 1em 0;
+    padding: 0;
+   }
 
   .prose-md ul,
   .prose-md ol { margin: 1em 0; padding-left: 1.25rem; }
