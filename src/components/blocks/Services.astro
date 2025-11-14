@@ -1,19 +1,24 @@
 ---
 import Section from "../layout/Section.astro";
 
+import ReorgIcon from "../../assets/icons/reorg.svg";
+import PrivateIcon from "../../assets/icons/private.svg";
+import AuditIcon from "../../assets/icons/audit.svg";
+import AdviceIcon from "../../assets/icons/advice.svg";
+
 /** Daten -> falls du später Texte ändern willst, hier zentral */
 const services = [
   {
     key: "reorg",
     title: "Umstrukturierungen",
-    icon: "/icons/reorg.svg",
+    icon: ReorgIcon,
     claim: "Rechtssicher und steueroptimiert in die nächste Unternehmensphase - ich berate Sie unter anderem zu folgenden Themen:",
     points: ["Rechtsformwahl", "Holding- & Konzernstrukturen", "Vorgänge nach dem Umwandlungssteuergesetz", "Nachfolgeplanung im Unternehmen"],
   },
   {
     key: "private",
     title: "Nachfolgeplanung",
-    icon: "/icons/private.svg",
+    icon: PrivateIcon,
     claim:
       "Vermögensnachfolge ist ein sensibles Thema. Umso wichtiger ist es, die steuerlichen Möglichkeiten und Konsequenzen frühzeitig zu kennen - und auf dieser Basis eine passende Gestaltung zu wählen.",
     points: [
@@ -26,14 +31,14 @@ const services = [
   {
     key: "audit",
     title: "Begleitung von Betriebsprüfungen",
-    icon: "/icons/audit.svg",
+    icon: AuditIcon,
     claim: "Ich unterstütze Sie mit meiner langjährigen Erfahrung als ehemalige Prüferin:",
     points: ["Beantwortung von Anfragen", "Begleitung und Beratung bei Zwischen- und Schlussbesprechungen", "Bescheidprüfung und Einwendungen"],
   },
   {
     key: "advice",
     title: "Beratung für Berater",
-    icon: "/icons/advice.svg",
+    icon: AdviceIcon,
     claim:
       "Ich kenne die Finanzverwaltung aus der Innenperspektive und teile mein Wissen und meine Erfahrungen gern mit Kolleginnen und Kollegen aus dem Berufsstand:",
     points: [
@@ -54,7 +59,9 @@ const services = [
           <span class="absolute left-0 top-0 h-full w-1.5 rounded-l-xl bg-primary/80" />
 
           <div class="flex items-center justify-between px-5 pt-5 gap-3">
-            <div class="text-primary">{s.icon && <img src={s.icon} alt="" class="w-12 h-12 shrink-0 opacity-90" loading="lazy" />}</div>
+            <span class="inline-flex items-center justify-center text-primary">
+              <s.icon class="w-12 h-12" aria-hidden="true" />
+            </span>
             <h3 class="text-xl font-semibold tracking-tight text-slate-900 flex-1">{s.title}</h3>
           </div>
 
