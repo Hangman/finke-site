@@ -1,4 +1,6 @@
 ---
+import Logo from "../assets/icons/logo.svg";
+
 const links = [
   { href: "/#home", label: "Home" },
   { href: "/#services", label: "Leistungen" },
@@ -12,8 +14,12 @@ const links = [
   <div class="site-wrap">
     <div class="flex h-18 items-center justify-between">
       <!-- Brand -->
-      <a href="/#home" class="group inline-flex items-center p-2 rounded-md transition-colors hover:bg-primary/10">
-        <img src="/logo.svg" alt="Logo" class="h-12 w-auto" />
+      <a
+        href="/#home"
+        class="group inline-flex items-center p-2 rounded-md transition-colors hover:bg-primary/10"
+        aria-label="Sophie Finke Steuerberatung – Logo"
+      >
+        <Logo class="h-12 w-auto" aria-hidden="true" />
       </a>
 
       <!-- Desktop -->

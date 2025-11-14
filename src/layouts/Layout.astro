@@ -2,6 +2,11 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/layout/Footer.astro";
+
+const siteUrl = "https://www.steuerberatung-finke.de";
+const title = "Sophie Finke · Steuerberatung";
+const description = "Steuerberatung mit Klarheit: Betriebsprüfungen, Unternehmensumstrukturierungen, Nachfolgeplanung und Beratung für Berater in NRW.";
+const ogImage = `${siteUrl}/og-image.jpg`;
 ---
 
 <!doctype html>
@@ -11,7 +16,23 @@ import Footer from "../components/layout/Footer.astro";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card (wird auch von vielen Messengern genutzt) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
   </head>
   <body class="bg-[#FAFAFA] text-gray-900">
     <Navbar />

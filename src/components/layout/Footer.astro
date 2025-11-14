@@ -1,6 +1,7 @@
 ---
 import MailIcon from "../../assets/icons/envelope-fill.svg";
 import PhoneIcon from "../../assets/icons/telephone-fill.svg";
+import Logo from "../../assets/icons/logo.svg";
 
 const year = new Date().getFullYear();
 
@@ -12,8 +13,10 @@ const PHONE = "+491716194510";
   <div class="site-wrap py-10 md:py-12">
     <div class="grid gap-8 md:grid-cols-3 items-start">
       <!-- Brand -->
-      <a href="/#home" class="group inline-flex items-center rounded-md transition-colors hover:bg-primary/10">
-        <img src="/logo.svg" alt="Logo" class="h-12 w-auto" />
+      <a href="/#home" class="group inline-flex items-center" aria-label="Sophie Finke Steuerberatung – Logo">
+        <div class="p-0 md:p-2 rounded-md transition-colors hover:bg-primary/10">
+          <Logo class="h-12 w-auto" aria-label="Logo" />
+        </div>
       </a>
 
       <!-- Seitenlinks -->
