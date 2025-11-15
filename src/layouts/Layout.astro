@@ -7,6 +7,24 @@ const siteUrl = "https://www.steuerberatung-finke.de";
 const title = "Sophie Finke · Steuerberatung";
 const description = "Steuerberatung mit Klarheit: Betriebsprüfungen, Unternehmensumstrukturierungen, Nachfolgeplanung und Beratung für Berater in NRW.";
 const ogImage = `${siteUrl}/og-image.jpg`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  name: "Sophie Finke Steuerberatung",
+  url: siteUrl,
+  logo: siteUrl + "/logo.svg",
+  image: ogImage,
+  telephone: "+49 171 6194510",
+  email: "kontakt@steuerberatung-finke.de",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Am Steigerturm 16",
+    postalCode: "45772",
+    addressLocality: "Marl",
+    addressCountry: "DE",
+  },
+};
 ---
 
 <!doctype html>
@@ -17,6 +35,10 @@ const ogImage = `${siteUrl}/og-image.jpg`;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={siteUrl + Astro.url.pathname} />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#F7F9FC" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -33,6 +55,9 @@ const ogImage = `${siteUrl}/og-image.jpg`;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="bg-[#FAFAFA] text-gray-900">
     <Navbar />

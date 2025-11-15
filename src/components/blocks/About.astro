@@ -1,7 +1,18 @@
 ---
 import Section from "../layout/Section.astro";
 
-const taetigkeiten = [
+type TimelineKind = "edu" | "work";
+
+interface TimelineItem {
+  from: string;
+  to?: string;
+  title: string;
+  org: string;
+  type: TimelineKind;
+  link?: string;
+}
+
+const taetigkeiten: TimelineItem[] = [
   { from: "seit 2024", title: "Bestellte Steuerberaterin, eigene Kanzlei", org: "Sophie Finke Steuerberatung", type: "edu" },
   { from: "seit 2022", title: "Dozentin (AO, ErbSt, Int. Steuerrecht)", org: "Studienwerk der Steuerberater", type: "work" },
   { from: "seit 2022", title: "Coach für Prüfungsvorbereitung - Gesellschafterin", org: "JES GbR", link: "https://www.jes-steuerrecht.de", type: "edu" },
@@ -14,8 +25,8 @@ const taetigkeiten = [
     type: "edu",
   },
   { from: "2015", to: "2016", title: "Betriebsprüferin - KMU", org: "Finanzverwaltung NRW", type: "work" },
-  { from: "2011", to: "2014", title: "Veranlagung - Einzelunternehmen", org: "Finanzverwaltung NRW", type: "edu" },
-  { from: "2015", title: "Steuerberaterexamen", org: "erfolgreich abgelegt", type: "work" },
+  { from: "2015", title: "Steuerberaterexamen", org: "erfolgreich abgelegt", type: "edu" },
+  { from: "2011", to: "2014", title: "Veranlagung - Einzelunternehmen", org: "Finanzverwaltung NRW", type: "work" },
   { from: "2014", title: "Abschluss: Master of Laws (LL.M.) Unternehmensteuerrecht", org: "Universität zu Köln", type: "edu" },
   { from: "2011", title: "Abschluss: Diplom-Finanzwirtin (FH)", org: "Hochschule für Finanzen NRW", type: "work" },
 ];
@@ -27,7 +38,7 @@ function parseYear(s: string) {
 }
 
 /** Sortierschlüssel: neueste zuerst (nimmt max von from/to) */
-function sortKey(it) {
+function sortKey(it: TimelineItem): number {
   const yFrom = parseYear(it.from);
   const yTo = it.to ? parseYear(it.to) : yFrom;
   return Math.max(yFrom, yTo);
@@ -72,33 +83,25 @@ function spanLabel(it: { from?: string; to?: string }) {
 }
 
 /** Gruppieren nach Startjahr (von „from“) */
-function groupByStartYear(items) {
-  const map = new Map<number, any[]>();
+function groupByStartYear(items: TimelineItem[]): [number, TimelineItem[]][] {
+  const map = new Map<number, TimelineItem[]>();
+
   for (const it of items) {
     const y = parseYear(it.from);
     if (!map.has(y)) map.set(y, []);
     map.get(y)!.push(it);
   }
+
   // Jahre neu→alt
   const years = [...map.keys()].sort((a, b) => b - a);
   // Einträge im Jahr ebenfalls neu→alt (nach sortKey)
-  return years.map((y) => [y, map.get(y)!.sort((a, b) => sortKey(b) - sortKey(a))] as const);
+  return years.map((y) => [y, map.get(y)!.sort((a, b) => sortKey(b) - sortKey(a))] as [number, TimelineItem[]]);
 }
 const groups = groupByStartYear(taetigkeiten);
 
-/** Hilfsfunktionen: Datum in Sortierschlüssel (für „neu → alt“) */
-function toKey(v) {
-  // akzeptiert "seit 08/2024", "07/2024", "2024"
-  const m = String(v).match(/(\d{2})\/(\d{4})|(\d{4})/);
-  if (!m) return 0;
-  const year = m[2] ? Number(m[2]) : Number(m[3]);
-  const month = m[1] ? Number(m[1]) : 12; // „seit YYYY“ → treat as Dezember für Sortierung (ziemlich neu)
-  return year * 100 + month;
-}
-
 /** Alternation: wir lassen left/right durch type vorgeben
     – edu -> links; work -> rechts; (damit „erst das eine, dann das andere usw.“) */
-function sideFor(item) {
+function sideFor(item: TimelineItem): "left" | "right" {
   return item.type === "edu" ? "left" : "right";
 }
 ---
