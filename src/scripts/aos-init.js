@@ -1,5 +1,5 @@
 import AOS from "aos";
 
 AOS.init({
-  once: false, // nur beim ersten Mal animieren
+  once: true, // nur beim ersten Mal animieren
 });
