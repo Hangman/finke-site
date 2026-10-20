@@ -100,6 +100,13 @@ function groupByStartYear(items: TimelineItem[]): [number, TimelineItem[]][] {
 }
 const groups = groupByStartYear(taetigkeiten);
 
+/** Ungerade Eintragszahl: letzter Eintrag (ungerade Position) steht bündig an
+    der Grid-Kante -> Achse endet 1rem darunter (-bottom-4).
+    Gerade Eintragszahl: letzter Eintrag (nth-child(2n)) ist um 3rem nach unten
+    versetzt und ragt über die Grid-Kante hinaus -> Achse endet 4rem darunter,
+    also ebenfalls 1rem unter der letzten Karte (-bottom-16). */
+const lastItemShiftedDown = taetigkeiten.length % 2 === 0;
+
 /** Alternation: wir lassen left/right durch type vorgeben
     – edu -> links; work -> rechts; (damit „erst das eine, dann das andere usw.“) */
 function sideFor(item: TimelineItem): "left" | "right" {
@@ -121,7 +128,11 @@ function sideFor(item: TimelineItem): "left" | "right" {
   <!-- Wrapper: Mittelachse absolut, Einträge in Grid -->
   <div class="hidden md:block relative">
     <!-- Mittelachse -->
-    <div class="absolute left-1/2 -translate-x-1/2 -top-4 -bottom-16 w-1 rounded-sm bg-primary/50">
+    <div
+      class={`absolute left-1/2 -translate-x-1/2 -top-4 w-1 rounded-sm bg-primary/50 ${
+        lastItemShiftedDown ? "-bottom-16" : "-bottom-4"
+      }`}
+    >
       <span class="absolute -top-7 left-1/2 -translate-x-1/2 text-lg font-semibold text-primary/85">Heute</span>
       <span class="absolute -bottom-7 left-1/2 -translate-x-1/2 text-lg font-semibold text-primary/85">2008</span>
     </div>
