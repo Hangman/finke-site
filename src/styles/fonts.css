@@ -29,31 +29,12 @@
 }
 
 /* ============ GeistMono (Monospace) ============ */
+/* Nur Regular (400) — in der Site wird GeistMono ausschließlich mit
+   font-weight 400 verwendet (Navbar, Footer). */
 @font-face {
   font-family: "GeistMono";
   src: url("/fonts/subset-GeistMono-Regular.woff2") format("woff2");
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "GeistMono";
-  src: url("/fonts/subset-GeistMono-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "GeistMono";
-  src: url("/fonts/subset-GeistMono-SemiBold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "GeistMono";
-  src: url("/fonts/subset-GeistMono-Bold.woff2") format("woff2");
-  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
